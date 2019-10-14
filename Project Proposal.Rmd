@@ -1,0 +1,108 @@
+---
+title: "DATA 606 Project Proposal"
+author: "Samuel I Kigamba"
+date: "October 14, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Data Preparation
+
+```{r, message=FALSE, warning=FALSE}
+# load data
+#install.packages("fueleconomy")
+library(plyr)
+library(dplyr)
+data("vehicles")
+```
+
+```{r}
+
+write.csv(vehicles, file = "vehicles.csv")
+vehicles <- read.csv(file = "vehicles.csv")
+
+head(vehicles)
+
+```
+```{r, message=FALSE, warning=FALSE}
+#vehicles <- read_csv("https://raw.githubusercontent.com/hadley/fueleconomy/master/data-raw/vehicles.csv", header = TRUE)
+#head(vehicles)
+```
+
+### Research question
+**You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.**
+
+Is the number of cylinders in a vehicle predictive of fuel economy?
+
+
+### Cases 
+**What are the cases, and how many are there?**
+
+Each case represents a vehicle cylinders. There are (nrow <- length(vehicles$cyl)) 33,442 observations in the given data set.
+
+```{r}
+nrow <- length(vehicles$cyl)
+nrow
+```
+
+### Data collection 
+**Describe the method of data collection.**
+
+Fuel economy data for all cars sold in the US from 1984 to 2015 is collected by the Environmental protection agency. (Source: https://www.fueleconomy.gov/feg/download.shtml). This is as a result of vehicle testing done at the Environmental Protection Agency's National Vehicle and Fuel Emissions Laboratory in Ann Arbor, Michigan, and by vehicle manufacturers with oversight by EPA.
+
+
+### Type of study 
+**What type of study is this (observational/experiment)?**
+
+This is an observational study.
+
+### Data Source
+**If you collected the data, state self-collected. If not, provide a citation/link.**
+
+Fuel economy data for all cars sold in the US from 1984 to 2015 is collected by the Environmental protection agency and is available online here (Source: https://www.fueleconomy.gov/feg/download.shtml). We have extracted it using fueleconomy package available under R (install.packages("fueleconomy")).
+
+### Dependent Variable
+**What is the response variable? Is it quantitative or qualitative?**
+
+The response variable is the highway fuel consumption/economy and is numerical.
+
+### Independent Variable
+**You should have two independent variables, one quantitative and one qualitative.**
+
+The independent variable is the number of cylinders (cyl) in the vehicles and is numerical.
+
+### Relevant summary statistics
+**Provide summary statistics for each the variables. Also include appropriate visualizations related to your research question (e.g. scatter plot, boxplots, etc). This step requires the use of R, hence a code chunk is provided below. Insert more code chunks as needed.**
+
+
+```{r}
+summary(vehicles$cyl)
+
+hist(vehicles$cyl, breaks = 5)
+```
+
+
+
+```{r}
+summary(vehicles$hwy)
+
+hist(vehicles$hwy, breaks = 30)
+line(vehicles$hwy)
+```
+
+
+
+```{r}
+summary(vehicles$hwy)
+
+plot(vehicles$cyl, vehicles$hwy)
+```
+
+```{r}
+summary(vehicles$hwy)
+
+plot(vehicles$hwy, vehicles$cyl)
+```
